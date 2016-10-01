@@ -1,0 +1,93 @@
+<!--
+This view is only for including in a lab booking view (e.g. spm, xrd etc.).
+It should not be used directly outside of a lab booking view.  
+-->
+<div class="panel panel-info">
+	<div class="panel-heading nav">
+		<span class="navbar-left">Analysis Details</span> <span
+			class="navbar-right"><a class="btn btn-default" href="javascript:void(0);"
+			ng-click="P.booking.analysisModes.push({samples:1,results:1})">Add
+				Row</a></span>
+	</div>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-md-2">
+				<label>Measurement/analysis mode</label>
+			</div>
+			<div class="col-md-2">
+				<label>No. of samples (input)</label>
+			</div>
+			<div class="col-md-2">
+				<label>No. of results (output)</label>
+			</div>
+			<div class="col-md-2">
+				<label>User's remarks</label>
+			</div>
+			<div class="col-md-2">
+				<label>Charges (&#8377;)</label>
+			</div>
+			<div class="col-md-2">
+				<label>Delete</label>
+			</div>
+		</div>
+		<div class="row form-group" ng-repeat="n in P.booking.analysisModes">
+			<div class="col-md-2">
+				<select class="form-control"
+					ng-options="i as i.code for i in Shared.RT track by i.resourceId"
+					ng-model="n.resourceType" ng-change="calcCharges(n)"></select>
+			</div>
+			<div class="col-md-2">
+				<input class="form-control" type="number" ng-model="n.samples"
+					ng-change="calcCharges(n)" />
+			</div>
+			<div class="col-md-2">
+				<input class="form-control" type="number" ng-model="n.results"
+					ng-change="calcCharges(n)" />
+			</div>
+			<div class="col-md-2">
+				<textarea class="form-control" ng-model="n.remarks"></textarea>
+			</div>
+			<div class="col-md-2">
+				<div>
+					<span>{{n.charges}}</span>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<input class="checkbox" type="checkbox" ng-click="n.deleted = true" />
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-offset-6 col-md-2"><b>Total:</b></div>
+			<div class="col-md-2">{{totalCharges}}</div>
+		</div>
+	</div>
+</div>
+<div class="panel panel-info">
+	<div class="panel-heading">
+		<h3 class="panel-title">Payment Details</h3>
+	</div>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-md-3 form-group">
+				<label>Payment Instrument</label> <select class="form-control" ng-model="P.booking.instrumentType">
+					<option value="CHECK">CHECK</option>
+					<option value="DRAFT">DRAFT</option>
+					<option value="NEFT">NEFT Transfer</option>
+					<option value="CASH">CASH</option>
+				</select>
+			</div>
+			<div class="col-md-3 form-group">
+				<label>Instrument Date</label>
+				<input type="date" placeholder="YYYY-MM-DD" class="form-control" ng-model="P.booking.instrumentDate" />
+			</div>
+			<div class="col-md-3 form-group">
+				<label>Instrument No.</label>
+				<input type="text" class="form-control" ng-model="P.booking.instrumentNo" />
+			</div>
+			<div class="col-md-3 form-group">
+				<label>Amount (&#8377;)</label>
+				<input type="number" class="form-control" ng-model="P.booking.instrumentAmt" />
+			</div>
+		</div>
+	</div>
+</div>

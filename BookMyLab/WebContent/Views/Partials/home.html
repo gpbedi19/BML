@@ -1,0 +1,70 @@
+<div ng-controller="HomeCtrl">
+	<div ng-include="'./Views/Partials/header.html'"></div>
+	<div class="container-fluid">
+		<div ng-if="Shared.User.loggedIn">
+			<div class="panel panel-default" ng-if="!Shared.hasRole('USER')">
+				<!-- Default panel contents -->
+				<div class="panel-heading">Pending Users</div>
+				<p class="alert" ng-if="P.UnverifiedUsers.length == 0">
+				No user found with pending verification! 
+				</p>
+				<!-- Table -->
+				<table class="table table-striped" ng-if="P.UnverifiedUsers.length > 0">
+					<thead>
+						<tr>
+							<th>S#</th>
+							<th>User</th>
+							<th>Affiliation</th>
+							<th>Verified?</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="u in P.UnverifiedUsers">
+							<td>{{$index+1}}</td>
+							<td>{{u.firstName+" "+u.lastName}}</td>
+							<td>{{printableProfileDetails(u)}}</td>
+							<td>
+								<input class="checkbox" type="checkbox" ng-model="u.verified"
+									ng-click="markUserVerified(u)" ng-disabled="u.verified" />
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="panel panel-default">
+				<!-- Default panel contents -->
+				<div class="panel-heading">Pending Bookings</div>
+				<p class="alert" ng-if="P.PendingBookings.length == 0">
+				No booking found pending for approval! 
+				</p>
+
+				<!-- Table -->
+				<table class="table table-striped" ng-if="P.PendingBookings.length > 0">
+					<thead>
+						<tr>
+							<th>S#</th>
+							<th ng-if="!Shared.hasRole('USER')">User</th>
+							<th>Lab</th>
+							<th>Booking date</th>
+							<th>Slot</th>
+							<th>Status</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="r in P.PendingBookings">
+							<td>{{$index+1}}</td>
+							<td ng-if="!Shared.hasRole('USER')">{{r.user.firstName+"
+								"+r.user.lastName}}</td>
+							<td>{{r.lab}}</td>
+							<td><a href="#/booking/{{r.lab}}/{{r.bookingId}}">{{r.bookingDate
+									| date:'fullDate' }}</a></td>
+							<td>{{r.startTime}}-{{r.endTime}}</td>
+							<td>{{r.status}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<!-- /container -->
+</div>

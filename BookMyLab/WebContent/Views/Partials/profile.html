@@ -1,0 +1,78 @@
+<div ng-controller="ProfileCtrl">
+	<div ng-include="'./Views/Partials/header.html'"></div>
+	<div class="container">
+		<div class="panel panel-info">
+			<!-- Default panel contents -->
+			<div class="panel-heading nav">
+				<span class="navbar-left">My Profile</span>
+			</div>
+			<div class="panel-body">
+				<form name="profile" novalidate>
+					<div>
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<label>Designation</label> <select ng-model="P.designation"
+										ng-options="d.dataValue as d.dataValue for d in Shared.SD.designation">
+									</select>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label>Department/division</label> <input name="dept"
+										ng-model="P.dept" type="text" uppercase class="form-control">
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label>Organization</label> <input name="org" ng-model="P.org"
+										type="text" uppercase class="form-control">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4 form-group">
+								<label>Organization type</label> <select ng-model="P.orgType"
+									ng-options="d.dataValue as d.dataValue for d in Shared.SD['org.type']">
+								</select>
+							</div>
+							<div class="col-md-4 form-group">
+								<label>Street address</label> <input name="address"
+									ng-model="P.address" type="text" uppercase class="form-control">
+							</div>
+							<div class="col-md-4 form-group">
+								<label>City</label> <input name="city" ng-model="P.city"
+									type="text" uppercase class="form-control">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4 form-group">
+								<label>State</label> <input name="state" ng-model="P.state"
+									type="text" uppercase class="form-control">
+							</div>
+							<div class="col-md-4 form-group">
+								<label>Postal code</label> <input name="postalCode"
+									ng-model="P.postalCode" type="text" uppercase
+									class="form-control">
+							</div>
+							<div class="col-md-4 form-group">
+								<label>Office phone</label> <input name="officePhone"
+									ng-model="P.officePhone" type="text" uppercase
+									class="form-control">
+							</div>
+						</div>
+						<div class="form-group">
+							<label>Web page URL</label> <input name="webPage"
+								ng-model="P.webPage" type="text" class="form-control">
+						</div>
+					</div>
+					<span class="navbar-right">
+						<button type="submit" class="btn btn-success"
+							ng-click="saveProfile()">Save</button> <a href="#/index"
+						class="btn btn-default">Close</a>
+					</span>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

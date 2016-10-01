@@ -1,0 +1,42 @@
+<div ng-controller="InvoiceCtrl">
+	<div ng-include="'./Views/Partials/header.html'"></div>
+	<div class="container-fluid">
+		<div class="panel panel-success big-text">
+			<div class="panel-heading">
+				<span>Invoice No. {{I.invoiceNo}}. Invoice Date:
+					{{I.invoiceDate | date:'medium'}}</span>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-md-3">
+						<label>Billed To:</label> {{I.billedTo}}
+					</div>
+					<div class="col-md-3">
+						<label>Billing Address:</label> {{I.billingAddress}}
+					</div>
+				</div>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>S#</th>
+							<th>Item</th>
+							<th>Charges (&#8377;)</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="m in I.analysisModes">
+							<td>{{$index+1}}</td>
+							<td>{{m.resourceType.code}}. {{m.samples}} samples. {{m.results}} results.</td>
+							<td>{{m.charges}}</td>
+						</tr>
+						<tr>
+							<td colspan="2">Payment mode: {{I.paymentMode}}</td>
+							<td>TOTAL: {{I.amount}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<!-- /container -->
+</div>

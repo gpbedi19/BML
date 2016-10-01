@@ -1,0 +1,97 @@
+<div ng-controller="LabBookingCtrl">
+	<div ng-include="'./Views/Partials/header.html'"></div>
+	<div class="container">
+		<h2>XRD Lab Reservation <span ng-if="P.booking.status !== undefined">({{P.booking.status}})</span></h2>
+		<div ng-include="'./Views/Partials/booking.html'"></div>
+		<div class="panel panel-info">
+			<!-- Default panel contents -->
+			<div class="panel-heading nav">
+				<span class="navbar-left">Sample description</span>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-md-4 form-group">
+						<label>Material</label> <input ng-model="P.material" type="text"
+							uppercase class="form-control">
+					</div>
+					<div class="col-md-4 form-group">
+						<label>Method of preparation</label> <input
+							ng-model="P.prepMethod" type="text" uppercase
+							class="form-control">
+					</div>
+					<div class="col-md-4 form-group">
+						<label>Angle of Scanning</label> <input
+							ng-model="P.scanAngle" type="text" uppercase
+							class="form-control">
+					</div>
+					<div class="col-md-4 form-group">
+						<label>Material type</label><br /> <label class="radio-inline">
+							<input type="radio" name="mtRadio" value="Film"
+							ng-model="P.materialType"> Film
+						</label> <label class="radio-inline"> <input type="radio"
+							name="mtRadio" ng-model="P.materialType" value="Powder">
+							Powder
+						</label>
+					</div>
+					
+					<div class="col-md-4 form-group">
+						<label>Monitoring (Please tick) </label><br /> <label class="radio-inline">
+						<label>Texture<input type="checkbox" class="checkbox"
+							ng-model="P.texture" />
+						</label>
+						<label>Residual Stress <input type="checkbox" class="checkbox"
+							ng-model="P.residual_stress" />
+						</label>
+						<label>SAXS <input type="checkbox" class="checkbox"
+							ng-model="P.saxs" />
+						</label>
+					</div>
+				</div>
+				
+				
+				<div class="row">
+					<div class="col-md-4 form-group">
+						<label>Toxic <input type="checkbox" class="checkbox"
+							ng-model="P.toxic" />
+						</label>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div ng-include="'./Views/Partials/analysisDetails.html'"></div>
+		<div class="panel">
+			<div class="form-group">
+				<label>Any other requirements or details</label>
+				<textarea class="form-control" rows="3"
+					ng-model="P.otherRequirements"></textarea>
+			</div>
+		</div>
+		<div class="panel" ng-if="Shared.hasRole('MANAGER')">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<label>Status</label> <select ng-model="P.booking.status">
+							<option value="PENDING">PENDING</option>
+							<option value="SCHEDULED">SCHEDULED</option>
+							<option value="REJECTED">REJECTED</option>
+							<option value="FINISHED">FINISHED</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label>Status notes</label>
+						<textarea class="form-control" rows="3"
+							ng-model="P.booking.statusNotes"></textarea>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="panel navbar-right">
+			<button type="submit" class="btn btn-success" ng-disabled="isSaveDisabled()"
+				ng-click="saveBooking()">Save</button>
+			<a href="#/index" class="btn btn-default">Close</a>
+		</div>
+
+	</div>
+</div>

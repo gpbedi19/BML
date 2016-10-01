@@ -1,0 +1,58 @@
+<div ng-controller="BookingCtrl">
+	<div class="panel panel-info">
+		<!-- Default panel contents -->
+		<div class="panel-heading nav">
+			<span class="navbar-left">Reservation slot details</span>
+			<div class="navbar-right"><a class="btn btn-default" href="#/invoice/{{P.booking.bookingId}}">Print Invoice</a></div>
+		</div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-md-4">
+					<label>Booking date</label>
+					<p class="input-group">
+						<input type="text" class="form-control"
+							uib-datepicker-popup="mediumDate" ng-model="bookingDate"
+							is-open="dtPopup.opened" close-text="Close" /> <span
+							class="input-group-btn">
+							<button type="button" class="btn btn-default" ng-click="openDt()">
+								<i class="glyphicon glyphicon-calendar"></i>
+							</button>
+						</span>
+					</p>
+				</div>
+				<div class="col-md-8">
+					<div>
+						<div>
+							<button ng-click="showSlider=!showSlider"
+								class="btn btn-xs">{{showSlider?'Hide':'Show'}} slot selector</button>
+							<span ng-if="P.booking.startTime !== undefined">
+								Selected slot: <span>{{P.booking.startTime+" - "+P.booking.endTime}} HRS.</span>
+							</span>
+							<span class="label label-danger" ng-if="overlaps">Selection overlaps with existing</span>
+							<div class="row animate-show" ng-show="showSlider">
+								<div class="col-md-12">
+									<rzslider rz-slider-model="slider.minValue"
+										rz-slider-high="slider.maxValue"
+										rz-slider-options="slider.options"></rzslider>
+								</div>
+							</div>
+						</div>
+						<br />
+						<div class="panel panel-info" ng-if="Slots.length > 0">
+							<label>Blocked slots for {{P.booking.bookingDate |
+								date:'mediumDate' }}</label>
+							<div class="row">
+								<div class="col-md-2" ng-repeat="s in Slots">
+									<span class="label label-warning">{{s.startTime+" - "+s.endTime}} HRS.</span>
+								</div>
+							</div>
+						</div>
+						<span ng-if="Slots.length == 0" class="col-md-6 alert alert-success">
+							No slots booked for {{P.booking.bookingDate | date:'mediumDate' }} yet!
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

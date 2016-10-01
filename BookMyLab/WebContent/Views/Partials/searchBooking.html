@@ -1,0 +1,87 @@
+<div ng-controller="BookingSearchCtrl">
+	<div ng-include="'./Views/Partials/header.html'"></div>
+	<div class="container">
+		<div class="panel panel-info">
+			<!-- Default panel contents -->
+			<div class="panel-heading nav">
+				<span class="navbar-left">Search lab bookings</span>
+			</div>
+			<div class="panel-body">
+				<form>
+					<div class="row">
+						<div class="col-md-2 form-group">
+							<label>Lab</label>
+							<select ng-model="P.lab">
+								<option value="sem">SEM</option>
+								<option value="spm">SPM</option>
+								<option value="xrd">XRD</option>
+								<option value="other">OTHER</option>
+							</select>
+						</div>
+						<div class="col-md-2 form-group">
+							<label>Booking date from</label>
+							<p class="input-group">
+								<input type="text" class="form-control"
+									uib-datepicker-popup="dd/MM/yyyy" ng-model="P.bookingDateFrom"
+									is-open="popup1.opened" close-text="Close" /> <span
+									class="input-group-btn">
+									<button type="button" class="btn btn-default"
+										ng-click="open1()">
+										<i class="glyphicon glyphicon-calendar"></i>
+									</button>
+								</span>
+							</p>
+						</div>
+						<div class="col-md-2 form-group">
+							<label>Booking date to</label>
+							<p class="input-group">
+								<input type="text" class="form-control"
+									uib-datepicker-popup="dd/MM/yyyy" ng-model="P.bookingDateTo"
+									is-open="popup2.opened" close-text="Close" /> <span
+									class="input-group-btn">
+									<button type="button" class="btn btn-default"
+										ng-click="open2()">
+										<i class="glyphicon glyphicon-calendar"></i>
+									</button>
+								</span>
+							</p>
+						</div>
+						<div class="col-md-2 form-group">
+							<label>Status</label> <select ng-model="P.status">
+								<option value="PENDING">PENDING</option>
+								<option value="REJECTED">REJECTED</option>
+								<option value="FINISHED">FINISHED</option>
+								<option value="SCHEDULED">SCHEDULED</option>
+							</select>
+						</div>
+						<div class="col-md-4 form-group">
+							<button type="submit" class="btn btn-success" ng-click="search()">Search</button>
+							<button type="reset" class="btn" ng-click="P={}">Clear</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<span ng-if="P.results.length == 0">No results to display. Please search with suitable criteria.</span>
+		<div class="panel panel-info">
+			<table class="table table-striped" ng-if="P.results.length > 0">
+				<thead>
+					<tr>
+						<th>S#</th>
+						<th><a ng-click="order('bookingDate')">Booking date</a></th>
+						<th ng-click="order('startTime')">Slot</th>
+						<th ng-click="order('status')">Status</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="r in P.results | orderBy:predicate:reverse">
+						<td>{{$index+1}}</td>
+						<td><a href="#/booking/{{r.lab}}/{{r.bookingId}}">{{r.bookingDate | date:'fullDate' }}</a></td>
+						<td>{{r.startTime}}-{{r.endTime}}</td>
+						<td>{{r.status}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="AutoLABPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>in.bookmylab.jpa.ResourcePricing</class>
+    <class>in.bookmylab.jpa.BookingCategory</class>
+    <class>in.bookmylab.jpa.Discount</class>
+    <class>in.bookmylab.jpa.Billing</class>
+    <class>in.bookmylab.jpa.SpmLabBooking</class>
+    <class>in.bookmylab.jpa.UserProfile</class>
+    <class>in.bookmylab.jpa.AuditLogs</class>
+    <class>in.bookmylab.jpa.ResourceBooking</class>
+    <class>in.bookmylab.jpa.Role</class>
+    <class>in.bookmylab.jpa.User</class>
+    <class>in.bookmylab.jpa.StaticData</class>
+    <class>in.bookmylab.jpa.StaticDataValue</class>
+    <class>in.bookmylab.jpa.AnalysisMode</class>
+    <class>in.bookmylab.jpa.ResourceType</class>
+    <class>in.bookmylab.jpa.XrdLabBooking</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/autolab?zeroDateTimeBehavior=convertToNull"/>
+      <property name="javax.persistence.jdbc.user" value="autolab"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.password" value="autolab."/>
+      <property name="eclipselink.logging.level" value="FINER"/>
+      <property name="eclipselink.persistence-context.reference-mode" value="HARD"/>
+      <property name="eclipselink.cache.shared.default" value="false"/>
+    </properties>
+  </persistence-unit>
+</persistence>
